@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "489210295006",
+    "project_id": "feild-data-management-portal",
+    "storage_bucket": "feild-data-management-portal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489210295006:android:abadee1289999d8ba9084f",
+        "android_client_info": {
+          "package_name": "com.example.fdmp_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489210295006-sa6pjdjq1stnfik4st3hj8b61sfn3f57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeDA4XnjR1knIn6Du8y3O15iDA4SrgbvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489210295006-sa6pjdjq1stnfik4st3hj8b61sfn3f57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
