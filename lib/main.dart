@@ -1,5 +1,6 @@
 // import 'package:fdmp_app/services/user_management.dart'
 
+import 'package:fdmp_app/constants/routes.dart';
 import 'package:fdmp_app/view/login_view.dart';
 import 'package:fdmp_app/view/register_view.dart';
 import 'package:fdmp_app/view/verify_email_view.dart';
@@ -20,9 +21,9 @@ Future<void> main() async {
     ),
     home: const HomePage(),
     routes: {
-      '/login/': (context) => const LoginView(),
-      '/register/': (context) => const RegisterView(),
-      '/notes/': (context) => const NoteView(),
+      loginRoute: (context) => const LoginView(),
+      registerRoute: (context) => const RegisterView(),
+      noteRoute: (context) => const NoteView(),
     },
   ));
 }
@@ -84,7 +85,7 @@ class _NoteViewState extends State<NoteView> {
                   if (shouldLogout) {
                     await FirebaseAuth.instance.signOut();
                     Navigator.of(context).pushNamedAndRemoveUntil(
-                      "/login/",
+                      loginRoute,
                       (_) => false,
                     );
                   }

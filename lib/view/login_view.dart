@@ -1,3 +1,4 @@
+import 'package:fdmp_app/constants/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:developer' as devtools show log;
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _LoginViewState extends State<LoginView> {
               final userCredential = await FirebaseAuth.instance
                   .signInWithEmailAndPassword(email: email, password: pass);
               Navigator.of(context).pushNamedAndRemoveUntil(
-                "/notes/",
+                noteRoute,
                 (route) => false,
               );
               devtools.log(userCredential.toString());
@@ -79,7 +80,7 @@ class _LoginViewState extends State<LoginView> {
         TextButton(
             onPressed: () {
               Navigator.of(context)
-                  .pushNamedAndRemoveUntil("/register/", (route) => false);
+                  .pushNamedAndRemoveUntil(registerRoute, (route) => false);
             },
             child: const Text("Not registered yet? Register here!"))
       ]),
