@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'dart:developer' as devtools show log;
 import 'package:flutter/material.dart';
-
-import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -31,43 +29,56 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      TextField(
-        keyboardType: TextInputType.emailAddress,
-        controller: _email,
-        decoration:
-            InputDecoration(border: OutlineInputBorder(), labelText: 'Email'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
       ),
-      TextField(
-        obscureText: true,
-        controller: _password,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(), labelText: 'password'),
-      ),
-      TextButton(
-        onPressed: () async {
-          final email = _email.text;
-          final pass = _password.text;
-          try {
-            final userCredential = await FirebaseAuth.instance
-                .signInWithEmailAndPassword(email: email, password: pass);
-          } on FirebaseAuthException catch (e) {
-            if (e.code == "invalid-email") {
-              print("Invalid Email");
-            }
-            if (e.code == "user-not-found") {
-              print("User Not Found or the user may have been deleted");
-            }
-            if (e.code == "wrong-password") {
-              print("Wrong Password");
-            }
+      body: Column(children: [
+        TextField(
+          keyboardType: TextInputType.emailAddress,
+          controller: _email,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(), labelText: 'Email'),
+        ),
+        TextField(
+          obscureText: true,
+          controller: _password,
+          decoration: const InputDecoration(
+              border: OutlineInputBorder(), labelText: 'password'),
+        ),
+        TextButton(
+          onPressed: () async {
+            final email = _email.text;
+            final pass = _password.text;
+            try {
+              final userCredential = await FirebaseAuth.instance
+                  .signInWithEmailAndPassword(email: email, password: pass);
+              devtools.log(userCredential.toString());
+            } on FirebaseAuthException catch (e) {
+              if (e.code == "invalid-email") {
+                devtools.log("invalid email");
+              }
+              if (e.code == "user-not-found") {
+                devtools
+                    .log("User Not Found or the user may have been deleted");
+              }
+              if (e.code == "wrong-password") {
+                devtools.log("Wrong Password");
+              }
 
-            // print(e.runtimeType);
-            // print(e.code);
-          }
-        },
-        child: const Text("Login"),
-      )
-    ]);
+              // print(e.runtimeType);
+              devtools.log(e.code);
+            }
+          },
+          child: const Text("Login"),
+        ),
+        TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/register/", (route) => false);
+            },
+            child: const Text("Not registered yet? Register here!"))
+      ]),
+    );
   }
 }
