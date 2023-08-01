@@ -53,6 +53,10 @@ class _LoginViewState extends State<LoginView> {
             try {
               final userCredential = await FirebaseAuth.instance
                   .signInWithEmailAndPassword(email: email, password: pass);
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                "/notes/",
+                (route) => false,
+              );
               devtools.log(userCredential.toString());
             } on FirebaseAuthException catch (e) {
               if (e.code == "invalid-email") {
